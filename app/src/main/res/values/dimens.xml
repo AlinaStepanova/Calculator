@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="largeText">40sp</dimen>
+    <dimen name="midText">24sp</dimen>
+    <dimen name="minMargin">2dp</dimen>
+    <dimen name="midMargin">8dp</dimen>
+    <dimen name="minPadding">8dp</dimen>
+    <dimen name="midPadding">16dp</dimen>
+    <dimen name="buttonPudding">8dp</dimen>
+</resources>

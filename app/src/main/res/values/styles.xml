@@ -13,9 +13,8 @@
         <item name="android:textSize">@dimen/midText</item>
         <item name="android:layout_margin">@dimen/minMargin</item>
         <item name="android:textColor">@color/colorTextArea</item>
-        <item name="android:padding">@dimen/buttonPudding</item>
-        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">0px</item>
     </style>
 
 </resources>

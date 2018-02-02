@@ -4,7 +4,8 @@
     <dimen name="midText">24sp</dimen>
     <dimen name="minMargin">2dp</dimen>
     <dimen name="midMargin">8dp</dimen>
-    <dimen name="minPadding">8dp</dimen>
-    <dimen name="midPadding">16dp</dimen>
+    <dimen name="midPadding">8dp</dimen>
+    <dimen name="minPadding">2dp</dimen>
+    <dimen name="maxPadding">16dp</dimen>
     <dimen name="buttonPudding">8dp</dimen>
 </resources>

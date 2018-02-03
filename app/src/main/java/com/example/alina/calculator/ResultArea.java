@@ -34,7 +34,17 @@ public class ResultArea {
         textView.setText(numberFormat.format(value));
     }
 
+    public void setStringResult(String stringResult) {
+        textView.setText(stringResult);
+    }
+
+    public void setMultipleStrings(String firstValue, String sign, String secondValue) {
+        setStringResult(numberFormat.format(Double.valueOf(firstValue)) + sign
+                + numberFormat.format(Double.valueOf(secondValue)));
+    }
+
+    //problems with 0
     public void clearText() {
-        textView.setText("0");
+        textView.setText("");
     }
 }

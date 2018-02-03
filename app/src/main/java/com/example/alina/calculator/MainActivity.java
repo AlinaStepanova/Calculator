@@ -24,6 +24,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button multiplyButton;
     private Button divideButton;
     private Button clearAllText;
+    private Button sqrtButton;
+    private Button sqrButton;
+    private Button oneDivX;
     private Controller controller;
     private TextView textView;
 
@@ -32,27 +35,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initUIElements();
-        controller = new Controller(textView);
+        controller = new Controller(textView, getApplicationContext());
         setListenerToButtons();
-    }
-
-    private void setListenerToButtons() {
-        oneButton.setOnClickListener(this);
-        twoButton.setOnClickListener(this);
-        threeButton.setOnClickListener(this);
-        fourButton.setOnClickListener(this);
-        fiveButton.setOnClickListener(this);
-        sixButton.setOnClickListener(this);
-        sevenButton.setOnClickListener(this);
-        eightButton.setOnClickListener(this);
-        nineButton.setOnClickListener(this);
-        zeroButton.setOnClickListener(this);
-        equalsButton.setOnClickListener(this);
-        plusButton.setOnClickListener(this);
-        minusButton.setOnClickListener(this);
-        multiplyButton.setOnClickListener(this);
-        divideButton.setOnClickListener(this);
-        clearAllText.setOnClickListener(this);
     }
 
     private void initUIElements() {
@@ -73,6 +57,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textView = findViewById(R.id.tvTextArea);
         equalsButton = findViewById(R.id.bEquals);
         clearAllText = findViewById(R.id.bC);
+        sqrtButton = findViewById(R.id.bSqrt);
+        sqrButton = findViewById(R.id.bSqr);
+        oneDivX = findViewById(R.id.bOneDivX);
+    }
+
+    private void setListenerToButtons() {
+        oneButton.setOnClickListener(this);
+        twoButton.setOnClickListener(this);
+        threeButton.setOnClickListener(this);
+        fourButton.setOnClickListener(this);
+        fiveButton.setOnClickListener(this);
+        sixButton.setOnClickListener(this);
+        sevenButton.setOnClickListener(this);
+        eightButton.setOnClickListener(this);
+        nineButton.setOnClickListener(this);
+        zeroButton.setOnClickListener(this);
+        equalsButton.setOnClickListener(this);
+        plusButton.setOnClickListener(this);
+        minusButton.setOnClickListener(this);
+        multiplyButton.setOnClickListener(this);
+        divideButton.setOnClickListener(this);
+        clearAllText.setOnClickListener(this);
+        sqrtButton.setOnClickListener(this);
+        sqrButton.setOnClickListener(this);
+        oneDivX.setOnClickListener(this);
     }
 
     @Override
@@ -102,6 +111,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bC:
                 controller.clearAll();
+                break;
+            case R.id.bSqrt:
+                controller.findSqrt();
+                break;
+            case R.id.bSqr:
+                controller.findSqr();
+                break;
+            case R.id.bOneDivX:
+                controller.oneDivideX();
                 break;
             default: break;
         }

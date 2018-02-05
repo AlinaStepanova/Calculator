@@ -32,6 +32,58 @@ public class Controller {
         sign = "";
     }
 
+    private void resetValues() {
+        firstValue = appendAsIntegerNumber(value);
+        secondValue = "";
+        sign = "";
+    }
+
+    private String appendAsIntegerNumber(double value) {
+        String text = "";
+        String valueString = String.valueOf(value);
+        int dotPosition = String.valueOf(value).indexOf(".");
+        if (value % 10 == 0) {
+            text = valueString.substring(0, dotPosition);
+        } else {
+            text += value;
+        }
+        return text;
+    }
+
+    public void addNumberToTextViewValue(String textViewValue) {
+        if (firstValue.equals(String.valueOf(value)) && secondValue.isEmpty() && sign.isEmpty()) {
+            clearAll();
+            firstValue += textViewValue;
+        } else if(sign.equals("")) {
+            firstValue += textViewValue;
+        } else {
+            secondValue += textViewValue;
+        }
+        resultArea.appendSymbol(textViewValue);
+    }
+
+    private void divideExpression() {
+        if (Double.parseDouble(secondValue) != 0 ) {
+            value = Double.parseDouble(firstValue) / Double.parseDouble(secondValue);
+        } else {
+            Toast.makeText(context, "Ділення на 0 неможливе", Toast.LENGTH_SHORT).show();
+            clearAll();
+        }
+    }
+
+    public void changeSign() {
+        if (!firstValue.isEmpty() && secondValue.isEmpty() && sign.isEmpty()) {
+            firstValue = String.valueOf(-(Double.parseDouble(firstValue)));
+            resultArea.setStringResult(numberFormat.format(Double.valueOf(firstValue)));
+        } else if (!firstValue.isEmpty() && secondValue.isEmpty() && !sign.isEmpty()) {
+            secondValue = String.valueOf(-(Double.parseDouble(firstValue)));
+            resultArea.setMultipleStrings(firstValue, sign, secondValue);
+        } else if (!firstValue.isEmpty() && !secondValue.isEmpty() && !sign.isEmpty()) {
+            secondValue = String.valueOf(-(Double.parseDouble(secondValue)));
+            resultArea.setMultipleStrings(firstValue, sign, secondValue);
+        }
+    }
+
     public void clearCE() {
         if (!firstValue.isEmpty() && secondValue.isEmpty() && sign.isEmpty()) {
             clearAll();
@@ -123,16 +175,6 @@ public class Controller {
         }
     }
 
-    public void addNumberToTextViewValue(String textViewValue) {
-        if(sign.equals("")) {
-            firstValue += textViewValue;
-        } else {
-            secondValue += textViewValue;
-        }
-        Log.d("val", firstValue + " " + secondValue + " value " + value);
-        resultArea.appendSymbol(textViewValue);
-    }
-
     public void calculateExpression() {
         if (secondValue.isEmpty()) {
             secondValue = firstValue;
@@ -157,35 +199,8 @@ public class Controller {
         resetValues();
     }
 
-    private void divideExpression() {
-        if (Double.parseDouble(secondValue) != 0 ) {
-            value = Double.parseDouble(firstValue) / Double.parseDouble(secondValue);
-        } else {
-            Toast.makeText(context, "Ділення на 0 неможливе", Toast.LENGTH_SHORT).show();
-            clearAll();
-        }
-    }
-
     public void clearAll() {
         initValues();
         resultArea.clearText();
-    }
-
-    private void resetValues() {
-        firstValue = appendAsIntegerNumber(value);
-        secondValue = "";
-        sign = "";
-    }
-
-    private String appendAsIntegerNumber(double value) {
-        String text = "";
-        String valueString = String.valueOf(value);
-        int dotPosition = String.valueOf(value).indexOf(".");
-        if (value % 10 == 0) {
-            text = valueString.substring(0, dotPosition);
-        } else {
-            text += value;
-        }
-        return text;
     }
 }

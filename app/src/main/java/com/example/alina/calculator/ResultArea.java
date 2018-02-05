@@ -36,8 +36,13 @@ public class ResultArea {
     }
 
     public void setMultipleStrings(String firstValue, String sign, String secondValue) {
-        setStringResult(numberFormat.format(Double.valueOf(firstValue)) + sign
-                + numberFormat.format(Double.valueOf(secondValue)));
+        if (Double.parseDouble(secondValue) < 0) {
+            setStringResult(numberFormat.format(Double.valueOf(firstValue)) + sign + "("
+                    + numberFormat.format(Double.valueOf(secondValue)) + ")");
+        } else {
+            setStringResult(numberFormat.format(Double.valueOf(firstValue)) + sign
+                    + numberFormat.format(Double.valueOf(secondValue)));
+        }
     }
 
     public void clearText() {

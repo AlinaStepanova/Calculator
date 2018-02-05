@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button oneDivXButton;
     private Button percentButton;
     private Button clearCEButton;
+    private Button changeSignButton;
     private Controller controller;
     private TextView textView;
 
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         oneDivXButton = findViewById(R.id.bOneDivX);
         percentButton = findViewById(R.id.bPercent);
         clearCEButton = findViewById(R.id.bCE);
+        changeSignButton = findViewById(R.id.bChangeSing);
     }
 
     private void setListenerToButtons() {
@@ -88,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         oneDivXButton.setOnClickListener(this);
         percentButton.setOnClickListener(this);
         clearCEButton.setOnClickListener(this);
+        changeSignButton.setOnClickListener(this);
     }
 
     @Override
@@ -132,6 +135,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bCE:
                 controller.clearCE();
+                break;
+            case R.id.bChangeSing:
+                controller.changeSign();
                 break;
             default: break;
         }

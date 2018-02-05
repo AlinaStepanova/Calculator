@@ -1,7 +1,4 @@
 package com.example.alina.calculator;
-
-
-import android.util.Log;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -18,7 +15,7 @@ public class ResultArea {
     }
 
     public void appendSymbol(String text) {
-        if (textView.getText().equals("0")) {
+        if (textView.getText().toString().equals("0")) {
             textView.setText("");
         }
         textView.append(text);
@@ -43,8 +40,7 @@ public class ResultArea {
                 + numberFormat.format(Double.valueOf(secondValue)));
     }
 
-    //problems with 0
     public void clearText() {
-        textView.setText("");
+        textView.setText("0");
     }
 }

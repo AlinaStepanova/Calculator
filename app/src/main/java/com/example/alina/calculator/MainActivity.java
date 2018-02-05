@@ -23,10 +23,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button minusButton;
     private Button multiplyButton;
     private Button divideButton;
-    private Button clearAllText;
+    private Button clearAllTextButton;
     private Button sqrtButton;
     private Button sqrButton;
-    private Button oneDivX;
+    private Button oneDivXButton;
+    private Button percentButton;
+    private Button clearCEButton;
     private Controller controller;
     private TextView textView;
 
@@ -56,10 +58,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         divideButton = findViewById(R.id.bDivide);
         textView = findViewById(R.id.tvTextArea);
         equalsButton = findViewById(R.id.bEquals);
-        clearAllText = findViewById(R.id.bC);
+        clearAllTextButton = findViewById(R.id.bC);
         sqrtButton = findViewById(R.id.bSqrt);
         sqrButton = findViewById(R.id.bSqr);
-        oneDivX = findViewById(R.id.bOneDivX);
+        oneDivXButton = findViewById(R.id.bOneDivX);
+        percentButton = findViewById(R.id.bPercent);
+        clearCEButton = findViewById(R.id.bCE);
     }
 
     private void setListenerToButtons() {
@@ -78,10 +82,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         minusButton.setOnClickListener(this);
         multiplyButton.setOnClickListener(this);
         divideButton.setOnClickListener(this);
-        clearAllText.setOnClickListener(this);
+        clearAllTextButton.setOnClickListener(this);
         sqrtButton.setOnClickListener(this);
         sqrButton.setOnClickListener(this);
-        oneDivX.setOnClickListener(this);
+        oneDivXButton.setOnClickListener(this);
+        percentButton.setOnClickListener(this);
+        clearCEButton.setOnClickListener(this);
     }
 
     @Override
@@ -120,6 +126,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bOneDivX:
                 controller.oneDivideX();
+                break;
+            case R.id.bPercent:
+                controller.findPercent();
+                break;
+            case R.id.bCE:
+                controller.clearCE();
                 break;
             default: break;
         }

@@ -25,6 +25,25 @@ public class Controller {
         initValues();
     }
 
+    private void initValues() {
+        value = 0;
+        firstValue = "0";
+        secondValue = "";
+        sign = "";
+    }
+
+    public void clearCE() {
+        if (!firstValue.isEmpty() && secondValue.isEmpty() && sign.isEmpty()) {
+            clearAll();
+        } else if (!firstValue.isEmpty() && secondValue.isEmpty() && !sign.isEmpty()) {
+            secondValue = String.valueOf(0);
+            resultArea.setMultipleStrings(firstValue, sign, secondValue);
+        } else if (!firstValue.isEmpty() && !secondValue.isEmpty() && !sign.isEmpty()) {
+            secondValue = String.valueOf(0);
+            resultArea.setMultipleStrings(firstValue, sign, secondValue);
+        }
+    }
+
     public void findSqrt() {
         if (!firstValue.isEmpty() && secondValue.isEmpty() && sign.isEmpty()
                 && (Double.parseDouble(firstValue) >= 0)) {
@@ -44,11 +63,19 @@ public class Controller {
         }
     }
 
-    private void initValues() {
-        value = 0;
-        firstValue = "0";
-        secondValue = "";
-        sign = "";
+    public void findPercent() {
+        if (!firstValue.isEmpty() && secondValue.isEmpty() && sign.isEmpty()) {
+            firstValue = String.valueOf(Double.parseDouble(firstValue) / 100);
+            resultArea.setStringResult(numberFormat.format(Double.valueOf(firstValue)));
+        } else if (!firstValue.isEmpty() && secondValue.isEmpty() && !sign.isEmpty()) {
+            secondValue = String.valueOf(Double.parseDouble(firstValue) / 100 *
+                    Double.parseDouble(firstValue));
+            resultArea.setMultipleStrings(firstValue, sign, secondValue);
+        } else if (!firstValue.isEmpty() && !secondValue.isEmpty() && !sign.isEmpty()) {
+            secondValue = String.valueOf(Double.parseDouble(firstValue) / 100 *
+                    Double.parseDouble(secondValue));
+            resultArea.setMultipleStrings(firstValue, sign, secondValue);
+        }
     }
 
     public void findSqr() {
@@ -102,6 +129,7 @@ public class Controller {
         } else {
             secondValue += textViewValue;
         }
+        Log.d("val", firstValue + " " + secondValue + " value " + value);
         resultArea.appendSymbol(textViewValue);
     }
 
@@ -121,12 +149,21 @@ public class Controller {
                 value = Double.parseDouble(firstValue) * Double.parseDouble(secondValue);
                 break;
             case "/":
-                value = Double.parseDouble(firstValue) / Double.parseDouble(secondValue);
+                divideExpression();
                 break;
             default: break;
         }
         resultArea.setResult(value);
         resetValues();
+    }
+
+    private void divideExpression() {
+        if (Double.parseDouble(secondValue) != 0 ) {
+            value = Double.parseDouble(firstValue) / Double.parseDouble(secondValue);
+        } else {
+            Toast.makeText(context, "Ділення на 0 неможливе", Toast.LENGTH_SHORT).show();
+            clearAll();
+        }
     }
 
     public void clearAll() {
@@ -135,8 +172,20 @@ public class Controller {
     }
 
     private void resetValues() {
-        firstValue = String.valueOf(value);
+        firstValue = appendAsIntegerNumber(value);
         secondValue = "";
         sign = "";
+    }
+
+    private String appendAsIntegerNumber(double value) {
+        String text = "";
+        String valueString = String.valueOf(value);
+        int dotPosition = String.valueOf(value).indexOf(".");
+        if (value % 10 == 0) {
+            text = valueString.substring(0, dotPosition);
+        } else {
+            text += value;
+        }
+        return text;
     }
 }

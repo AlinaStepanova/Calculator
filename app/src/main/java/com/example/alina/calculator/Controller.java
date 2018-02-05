@@ -5,6 +5,8 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static com.example.alina.calculator.Values.*;
+
 public class Controller {
 
     private ResultArea resultArea;
@@ -22,30 +24,30 @@ public class Controller {
 
     private void initValues() {
         value = 0;
-        firstValue = "0";
-        secondValue = "";
-        sign = "";
+        firstValue = ZERO;
+        secondValue = EMPTY_STRING;
+        sign = EMPTY_STRING;
     }
 
     private void divideExpression() {
         if (Double.parseDouble(secondValue) != 0 ) {
             value = Double.parseDouble(firstValue) / Double.parseDouble(secondValue);
         } else {
-            Toast.makeText(context, "Ділення на 0 неможливе", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, DIVIDE_BY_ZERO_MESSAGE, Toast.LENGTH_SHORT).show();
             clearAll();
         }
     }
 
     private void resetValues() {
         firstValue = appendAsIntegerNumber(value);
-        secondValue = "";
-        sign = "";
+        secondValue = EMPTY_STRING;
+        sign = EMPTY_STRING;
     }
 
     private String appendAsIntegerNumber(double value) {
-        String text = "";
+        String text = EMPTY_STRING;
         String valueString = String.valueOf(value);
-        int dotPosition = String.valueOf(value).indexOf(".");
+        int dotPosition = String.valueOf(value).indexOf(DOT);
         if (value % 10 == 0) {
             text = valueString.substring(0, dotPosition);
         } else {
@@ -58,7 +60,7 @@ public class Controller {
         if (!firstValue.isEmpty() && secondValue.isEmpty() && sign.isEmpty()
                 && !firstValue.equals(String.valueOf(value))) {
             if (firstValue.length() == 1) {
-                firstValue = "0";
+                firstValue = ZERO;
             } else {
                 firstValue = firstValue.substring(0, firstValue.length() - 1);
             }
@@ -66,12 +68,12 @@ public class Controller {
         } else if (!firstValue.isEmpty() && !secondValue.isEmpty() && !sign.isEmpty()) {
             if (secondValue.length() > 1) {
                 secondValue = secondValue.substring(0, secondValue.length() - 1);
-            } else if (secondValue.length() > 1 && (secondValue.contains(")"))) {
-                secondValue = "0";
+            } else if (secondValue.length() > 1 && (secondValue.contains(CLOSED_PARENTHESIS))) {
+                secondValue = ZERO;
             } else {
-                secondValue = "0";
+                secondValue = ZERO;
             }
-            resultArea.setMultipleStrings(firstValue, sign, secondValue, "");
+            resultArea.setMultipleStrings(firstValue, sign, secondValue, EMPTY_STRING);
         }
     }
 
@@ -79,11 +81,11 @@ public class Controller {
         if (firstValue.equals(String.valueOf(value)) && secondValue.isEmpty() && sign.isEmpty()) {
             clearAll();
             firstValue += textViewValue;
-        } else if (sign.equals("")) {
+        } else if (sign.equals(EMPTY_STRING)) {
             firstValue += textViewValue;
         } else {
-            if (secondValue.equals("0")) {
-                secondValue = "";
+            if (secondValue.equals(ZERO)) {
+                secondValue = EMPTY_STRING;
             }
             secondValue += textViewValue;
         }
@@ -92,17 +94,21 @@ public class Controller {
 
     public void putComa() {
         if (!firstValue.isEmpty() && secondValue.isEmpty() && sign.isEmpty()
-                && !firstValue.contains(".")) {
-            firstValue = String.valueOf(firstValue + ".");
-            resultArea.setStringResult(resultArea.getFormat(Double.valueOf(firstValue)) + ",");
+                && !firstValue.contains(DOT)) {
+            firstValue = String.valueOf(firstValue + DOT);
+            resultArea.setStringResult(resultArea.getFormat(firstValue) + COMA);
+        } else if (firstValue.equals(appendAsIntegerNumber(value)) && secondValue.isEmpty()
+                && sign.isEmpty()) {
+            firstValue = String.valueOf(ZERO + DOT);
+            resultArea.setStringResult(resultArea.getFormat(firstValue) + COMA);
         } else if (!firstValue.isEmpty() && secondValue.isEmpty() && !sign.isEmpty()
-                && !secondValue.contains(".")) {
-            secondValue = String.valueOf("0.");
-            resultArea.setMultipleStrings(firstValue, sign, secondValue, ",");
+                && !secondValue.contains(DOT)) {
+            secondValue = String.valueOf(ZERO + DOT);
+            resultArea.setMultipleStrings(firstValue, sign, secondValue, COMA);
         } else if (!firstValue.isEmpty() && !secondValue.isEmpty() && !sign.isEmpty()
-                && !secondValue.contains(".")) {
-            secondValue = String.valueOf(secondValue + ".");
-            resultArea.setMultipleStrings(firstValue, sign, secondValue, ",");
+                && !secondValue.contains(DOT)) {
+            secondValue = String.valueOf(secondValue + DOT);
+            resultArea.setMultipleStrings(firstValue, sign, secondValue, COMA);
         }
     }
 
@@ -112,10 +118,10 @@ public class Controller {
             resultArea.setResult(Double.valueOf(firstValue));
         } else if (!firstValue.isEmpty() && secondValue.isEmpty() && !sign.isEmpty()) {
             secondValue = String.valueOf(-(Double.parseDouble(firstValue)));
-            resultArea.setMultipleStrings(firstValue, sign, secondValue, "");
+            resultArea.setMultipleStrings(firstValue, sign, secondValue, EMPTY_STRING);
         } else if (!firstValue.isEmpty() && !secondValue.isEmpty() && !sign.isEmpty()) {
             secondValue = String.valueOf(-(Double.parseDouble(secondValue)));
-            resultArea.setMultipleStrings(firstValue, sign, secondValue, "");
+            resultArea.setMultipleStrings(firstValue, sign, secondValue, EMPTY_STRING);
         }
     }
 
@@ -124,10 +130,10 @@ public class Controller {
             clearAll();
         } else if (!firstValue.isEmpty() && secondValue.isEmpty() && !sign.isEmpty()) {
             secondValue = String.valueOf(0);
-            resultArea.setMultipleStrings(firstValue, sign, secondValue, "");
+            resultArea.setMultipleStrings(firstValue, sign, secondValue, EMPTY_STRING);
         } else if (!firstValue.isEmpty() && !secondValue.isEmpty() && !sign.isEmpty()) {
             secondValue = String.valueOf(0);
-            resultArea.setMultipleStrings(firstValue, sign, secondValue, "");
+            resultArea.setMultipleStrings(firstValue, sign, secondValue, EMPTY_STRING);
         }
     }
 
@@ -139,13 +145,13 @@ public class Controller {
         } else if (!firstValue.isEmpty() && secondValue.isEmpty() && !sign.isEmpty()
                 && (Double.parseDouble(firstValue) >= 0)) {
             secondValue = String.valueOf(Math.sqrt(Double.parseDouble(firstValue)));
-            resultArea.setMultipleStrings(firstValue, sign, secondValue, "");
+            resultArea.setMultipleStrings(firstValue, sign, secondValue, EMPTY_STRING);
         } else if (!firstValue.isEmpty() && !secondValue.isEmpty() && !sign.isEmpty()
                 && (Double.parseDouble(secondValue) >= 0)) {
             secondValue = String.valueOf(Math.sqrt(Double.parseDouble(secondValue)));
-            resultArea.setMultipleStrings(firstValue, sign, secondValue, "");
+            resultArea.setMultipleStrings(firstValue, sign, secondValue, EMPTY_STRING);
         } else {
-            Toast.makeText(context, "Уведені некоректні дані", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, INCORRECT_VALUES_MESSAGE, Toast.LENGTH_SHORT).show();
             clearAll();
         }
     }
@@ -157,11 +163,11 @@ public class Controller {
         } else if (!firstValue.isEmpty() && secondValue.isEmpty() && !sign.isEmpty()) {
             secondValue = String.valueOf(Double.parseDouble(firstValue) / 100 *
                     Double.parseDouble(firstValue));
-            resultArea.setMultipleStrings(firstValue, sign, secondValue, "");
+            resultArea.setMultipleStrings(firstValue, sign, secondValue, EMPTY_STRING);
         } else if (!firstValue.isEmpty() && !secondValue.isEmpty() && !sign.isEmpty()) {
             secondValue = String.valueOf(Double.parseDouble(firstValue) / 100 *
                     Double.parseDouble(secondValue));
-            resultArea.setMultipleStrings(firstValue, sign, secondValue, "");
+            resultArea.setMultipleStrings(firstValue, sign, secondValue, EMPTY_STRING);
         }
     }
 
@@ -171,10 +177,10 @@ public class Controller {
             resultArea.setResult(Double.valueOf(firstValue));
         } else if (!firstValue.isEmpty() && secondValue.isEmpty() && !sign.isEmpty()) {
             secondValue = String.valueOf(Math.pow((Double.parseDouble(firstValue)), 2));
-            resultArea.setMultipleStrings(firstValue, sign, secondValue, "");
+            resultArea.setMultipleStrings(firstValue, sign, secondValue, EMPTY_STRING);
         } else if (!firstValue.isEmpty() && !secondValue.isEmpty() && !sign.isEmpty()) {
             secondValue = String.valueOf(Math.pow((Double.parseDouble(secondValue)), 2));
-            resultArea.setMultipleStrings(firstValue, sign, secondValue, "");
+            resultArea.setMultipleStrings(firstValue, sign, secondValue, EMPTY_STRING);
         }
     }
 
@@ -186,19 +192,19 @@ public class Controller {
         } else if (!firstValue.isEmpty() && secondValue.isEmpty() && !sign.isEmpty()
                 && (Double.parseDouble(firstValue) != 0)) {
             secondValue = String.valueOf(1 / (Double.parseDouble(firstValue)));
-            resultArea.setMultipleStrings(firstValue, sign, secondValue, "");
+            resultArea.setMultipleStrings(firstValue, sign, secondValue, EMPTY_STRING);
         } else if (!firstValue.isEmpty() && !secondValue.isEmpty() && !sign.isEmpty()
                 && (Double.parseDouble(secondValue) != 0)) {
             secondValue = String.valueOf(1 / (Double.parseDouble(secondValue)));
-            resultArea.setMultipleStrings(firstValue, sign, secondValue, "");
+            resultArea.setMultipleStrings(firstValue, sign, secondValue, EMPTY_STRING);
         } else {
-            Toast.makeText(context, "Ділення на 0 неможливе", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, DIVIDE_BY_ZERO_MESSAGE, Toast.LENGTH_SHORT).show();
             clearAll();
         }
     }
 
     public void setSign(String sign) {
-        if (this.sign.equals("")) {
+        if (this.sign.equals(EMPTY_STRING)) {
             resultArea.appendSymbol(sign);
             this.sign = sign;
         } else if(!firstValue.isEmpty() && !sign.isEmpty() && secondValue.isEmpty()) {
@@ -216,21 +222,20 @@ public class Controller {
             value = Double.parseDouble(firstValue);
         }
         switch (sign) {
-            case "+":
+            case PLUS:
                 value = Double.parseDouble(firstValue) + Double.parseDouble(secondValue);
                 break;
-            case "-":
+            case MINUS:
                 value = Double.parseDouble(firstValue) - Double.parseDouble(secondValue);
                 break;
-            case "*":
+            case MULTIPLY:
                 value = Double.parseDouble(firstValue) * Double.parseDouble(secondValue);
                 break;
-            case "/":
+            case DIVIDE:
                 divideExpression();
                 break;
             default: break;
         }
-        Log.d("val", firstValue + " " + secondValue + " value " + value);
         resultArea.setResult(value);
         resetValues();
     }

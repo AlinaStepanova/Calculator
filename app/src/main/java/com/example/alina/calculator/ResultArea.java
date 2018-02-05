@@ -1,9 +1,10 @@
 package com.example.alina.calculator;
-import android.util.Log;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+
+import static com.example.alina.calculator.Values.*;
 
 public class ResultArea {
 
@@ -16,8 +17,8 @@ public class ResultArea {
     }
 
     public void appendSymbol(String text) {
-        if (textView.getText().toString().equals("0")) {
-            textView.setText("");
+        if (textView.getText().toString().equals(ZERO)) {
+            textView.setText(EMPTY_STRING);
         }
         textView.append(text);
     }
@@ -29,11 +30,15 @@ public class ResultArea {
     }
 
     public void setResult(double value) {
-        textView.setText(getFormat(value));
+        textView.setText(numberFormat.format(value));
     }
 
-    public String getFormat(double value) {
+    /*public String getFormat(double value) {
         return numberFormat.format(value);
+    }*/
+
+    public String getFormat(String value) {
+        return numberFormat.format(Double.valueOf(value));
     }
 
     public void setStringResult(String stringResult) {
@@ -42,15 +47,14 @@ public class ResultArea {
 
     public void setMultipleStrings(String firstValue, String sign, String secondValue, String coma) {
         if (Double.parseDouble(secondValue) < 0) {
-            setStringResult(getFormat(Double.valueOf(firstValue)) + sign + "("
-                    + getFormat(Double.valueOf(secondValue)) + coma + ")");
+            setStringResult(getFormat(firstValue) + sign + OPENED_PARENTHESIS
+                    + getFormat(secondValue) + coma + CLOSED_PARENTHESIS);
         } else {
-            setStringResult(getFormat(Double.valueOf(firstValue)) + sign
-                    + getFormat(Double.valueOf(secondValue)) + coma);
+            setStringResult(getFormat(firstValue) + sign + getFormat(secondValue) + coma);
         }
     }
 
     public void clearText() {
-        textView.setText("0");
+        textView.setText(ZERO);
     }
 }

@@ -1,4 +1,5 @@
 package com.example.alina.calculator;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -28,20 +29,24 @@ public class ResultArea {
     }
 
     public void setResult(double value) {
-        textView.setText(numberFormat.format(value));
+        textView.setText(getFormat(value));
+    }
+
+    public String getFormat(double value) {
+        return numberFormat.format(value);
     }
 
     public void setStringResult(String stringResult) {
         textView.setText(stringResult);
     }
 
-    public void setMultipleStrings(String firstValue, String sign, String secondValue) {
+    public void setMultipleStrings(String firstValue, String sign, String secondValue, String coma) {
         if (Double.parseDouble(secondValue) < 0) {
-            setStringResult(numberFormat.format(Double.valueOf(firstValue)) + sign + "("
-                    + numberFormat.format(Double.valueOf(secondValue)) + ")");
+            setStringResult(getFormat(Double.valueOf(firstValue)) + sign + "("
+                    + getFormat(Double.valueOf(secondValue)) + coma + ")");
         } else {
-            setStringResult(numberFormat.format(Double.valueOf(firstValue)) + sign
-                    + numberFormat.format(Double.valueOf(secondValue)));
+            setStringResult(getFormat(Double.valueOf(firstValue)) + sign
+                    + getFormat(Double.valueOf(secondValue)) + coma);
         }
     }
 

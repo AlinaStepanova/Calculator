@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button percentButton;
     private Button clearCEButton;
     private Button changeSignButton;
+    private Button comaButton;
+    private Button deleteLastCharacterButton;
     private Controller controller;
     private TextView textView;
 
@@ -66,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         percentButton = findViewById(R.id.bPercent);
         clearCEButton = findViewById(R.id.bCE);
         changeSignButton = findViewById(R.id.bChangeSing);
+        comaButton = findViewById(R.id.bComa);
+        deleteLastCharacterButton = findViewById(R.id.bDeleteLast);
     }
 
     private void setListenerToButtons() {
@@ -91,6 +95,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         percentButton.setOnClickListener(this);
         clearCEButton.setOnClickListener(this);
         changeSignButton.setOnClickListener(this);
+        comaButton.setOnClickListener(this);
+        deleteLastCharacterButton.setOnClickListener(this);
     }
 
     @Override
@@ -138,6 +144,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bChangeSing:
                 controller.changeSign();
+                break;
+            case R.id.bComa:
+                controller.putComa();
+                break;
+            case R.id.bDeleteLast:
+                controller.deleteLastCharacter();
                 break;
             default: break;
         }

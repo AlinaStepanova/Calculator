@@ -17,4 +17,8 @@
         <item name="android:layout_width">0px</item>
     </style>
 
+    <style name="ButtonNumberStyle" parent="ButtonStyle">
+        <item name="android:background">@color/colorNumberButton</item>
+    </style>
+
 </resources>

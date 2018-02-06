@@ -33,10 +33,6 @@ public class ResultArea {
         textView.setText(numberFormat.format(value));
     }
 
-    /*public String getFormat(double value) {
-        return numberFormat.format(value);
-    }*/
-
     public String getFormat(String value) {
         return numberFormat.format(Double.valueOf(value));
     }

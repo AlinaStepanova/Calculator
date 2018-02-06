@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="bPercent" type="id"/>
+    <item name="bSqrt" type="id"/>
+    <item name="bSqr" type="id"/>
+    <item name="bDivide" type="id"/>
+    <item name="bMultiply" type="id"/>
+    <item name="bMinus" type="id"/>
+    <item name="bPlus" type="id"/>
+    <item name="bOneDivX" type="id"/>
+    <item name="bZero" type="id"/>
+    <item name="bOne" type="id"/>
+    <item name="bTwo" type="id"/>
+    <item name="bThree" type="id"/>
+    <item name="bFour" type="id"/>
+    <item name="bFive" type="id"/>
+    <item name="bSix" type="id"/>
+    <item name="bSeven" type="id"/>
+    <item name="bEight" type="id"/>
+    <item name="bNine" type="id"/>
+    <item name="bEquals" type="id"/>
+    <item name="bChangeSign" type="id"/>
+    <item name="bComa" type="id"/>
+    <item name="bC" type="id"/>
+    <item name="bCE" type="id"/>
+    <item name="bDeleteLast" type="id"/>
+</resources>

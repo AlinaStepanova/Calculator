@@ -1,102 +1,77 @@
 package com.example.alina.calculator;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
+
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button oneButton;
-    private Button twoButton;
-    private Button threeButton;
-    private Button fourButton;
-    private Button fiveButton;
-    private Button sixButton;
-    private Button sevenButton;
-    private Button eightButton;
-    private Button nineButton;
-    private Button zeroButton;
-    private Button equalsButton;
-    private Button plusButton;
-    private Button minusButton;
-    private Button multiplyButton;
-    private Button divideButton;
-    private Button clearAllTextButton;
-    private Button sqrtButton;
-    private Button sqrButton;
-    private Button oneDivXButton;
-    private Button percentButton;
-    private Button clearCEButton;
-    private Button changeSignButton;
-    private Button comaButton;
-    private Button deleteLastCharacterButton;
     private Controller controller;
     private TextView textView;
+    private TableLayout tableLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initUIElements();
-        controller = new Controller(textView, getApplicationContext());
-        setListenerToButtons();
-    }
-
-    private void initUIElements() {
-        oneButton = findViewById(R.id.bOne);
-        twoButton = findViewById(R.id.bTwo);
-        threeButton = findViewById(R.id.bThree);
-        fourButton = findViewById(R.id.bFour);
-        fiveButton = findViewById(R.id.bFive);
-        sixButton = findViewById(R.id.bSix);
-        sevenButton = findViewById(R.id.bSeven);
-        eightButton = findViewById(R.id.bEight);
-        nineButton = findViewById(R.id.bNine);
-        zeroButton = findViewById(R.id.bZero);
-        plusButton = findViewById(R.id.bPlus);
-        minusButton = findViewById(R.id.bMinus);
-        multiplyButton = findViewById(R.id.bMultiply);
-        divideButton = findViewById(R.id.bDivide);
         textView = findViewById(R.id.tvTextArea);
-        equalsButton = findViewById(R.id.bEquals);
-        clearAllTextButton = findViewById(R.id.bC);
-        sqrtButton = findViewById(R.id.bSqrt);
-        sqrButton = findViewById(R.id.bSqr);
-        oneDivXButton = findViewById(R.id.bOneDivX);
-        percentButton = findViewById(R.id.bPercent);
-        clearCEButton = findViewById(R.id.bCE);
-        changeSignButton = findViewById(R.id.bChangeSing);
-        comaButton = findViewById(R.id.bComa);
-        deleteLastCharacterButton = findViewById(R.id.bDeleteLast);
+        controller = new Controller(textView, getApplicationContext());
+        tableLayout = findViewById(R.id.tlContainer);
+        initTableLayout();
     }
 
-    private void setListenerToButtons() {
-        oneButton.setOnClickListener(this);
-        twoButton.setOnClickListener(this);
-        threeButton.setOnClickListener(this);
-        fourButton.setOnClickListener(this);
-        fiveButton.setOnClickListener(this);
-        sixButton.setOnClickListener(this);
-        sevenButton.setOnClickListener(this);
-        eightButton.setOnClickListener(this);
-        nineButton.setOnClickListener(this);
-        zeroButton.setOnClickListener(this);
-        equalsButton.setOnClickListener(this);
-        plusButton.setOnClickListener(this);
-        minusButton.setOnClickListener(this);
-        multiplyButton.setOnClickListener(this);
-        divideButton.setOnClickListener(this);
-        clearAllTextButton.setOnClickListener(this);
-        sqrtButton.setOnClickListener(this);
-        sqrButton.setOnClickListener(this);
-        oneDivXButton.setOnClickListener(this);
-        percentButton.setOnClickListener(this);
-        clearCEButton.setOnClickListener(this);
-        changeSignButton.setOnClickListener(this);
-        comaButton.setOnClickListener(this);
-        deleteLastCharacterButton.setOnClickListener(this);
+    private void initTableLayout() {
+        initTableRow(initButton(R.id.bPercent, R.string.percent),
+                initButton(R.id.bSqrt, R.string.sqrt),
+                initButton(R.id.bSqr, R.string.xSquared),
+                initButton(R.id.bOneDivX, R.string._1_x));
+        initTableRow(initButton(R.id.bCE, R.string.ce),
+                initButton(R.id.bC, R.string.c),
+                initButton(R.id.bDeleteLast, R.string.deleteLast),
+                initButton(R.id.bDivide, R.string.divide));
+        initTableRow(initButton(R.id.bSeven, R.string.seven),
+                initButton(R.id.bEight, R.string.eight),
+                initButton(R.id.bNine, R.string.nine),
+                initButton(R.id.bMultiply, R.string.multiply));
+        initTableRow(initButton(R.id.bFour, R.string.four),
+                initButton(R.id.bFive, R.string.five),
+                initButton(R.id.bSix, R.string.six),
+                initButton(R.id.bMinus, R.string.minus));
+        initTableRow(initButton(R.id.bOne, R.string.one),
+                initButton(R.id.bTwo, R.string.two),
+                initButton(R.id.bThree, R.string.three),
+                initButton(R.id.bPlus, R.string.plus));
+        initTableRow(initButton(R.id.bChangeSign, R.string.changeSign),
+                initButton(R.id.bZero, R.string.zero),
+                initButton(R.id.bComa, R.string.coma),
+                initButton(R.id.bEquals, R.string.equals));
+    }
+
+    private void initTableRow(CustomButton child, CustomButton child2, CustomButton child3,
+                              CustomButton child4) {
+        TableRow firstRow = new TableRow(this);
+        firstRow.setLayoutParams(new TableLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT, (float) 1.0));
+        firstRow.addView(child);
+        firstRow.addView(child2);
+        firstRow.addView(child3);
+        firstRow.addView(child4);
+        tableLayout.addView(firstRow);
+    }
+
+    @NonNull
+    private CustomButton initButton(int id, int text) {
+        CustomButton customButton =
+                (CustomButton) getLayoutInflater().inflate(R.layout.custom_button, null);
+        customButton.setValues(id, text);
+        customButton.setOnClickListener(this);
+        return customButton;
     }
 
     @Override
@@ -142,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bCE:
                 controller.clearCE();
                 break;
-            case R.id.bChangeSing:
+            case R.id.bChangeSign:
                 controller.changeSign();
                 break;
             case R.id.bComa:

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.alina.calculator.CustomButton
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/button"
+    android:text="@string/button"
+    style="@style/ButtonStyle"/>

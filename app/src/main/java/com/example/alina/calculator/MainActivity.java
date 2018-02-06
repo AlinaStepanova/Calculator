@@ -3,6 +3,7 @@ package com.example.alina.calculator;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -56,13 +57,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initTableRow(CustomButton child, CustomButton child2, CustomButton child3,
                               CustomButton child4) {
-        TableRow firstRow = new TableRow(this);
-        firstRow.setLayoutParams(new TableLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT, (float) 1.0));
-        firstRow.addView(child);
-        firstRow.addView(child2);
-        firstRow.addView(child3);
-        firstRow.addView(child4);
-        tableLayout.addView(firstRow);
+        TableRow row = new TableRow(this);
+        row.setLayoutParams(new TableLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT, 1f));
+        row.setGravity(Gravity.CENTER);
+        row.addView(child);
+        row.addView(child2);
+        row.addView(child3);
+        row.addView(child4);
+        tableLayout.addView(row);
     }
 
     @NonNull

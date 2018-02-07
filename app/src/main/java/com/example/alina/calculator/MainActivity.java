@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         CustomButton customButton =
                 (CustomButton) getLayoutInflater().inflate(R.layout.custom_button, null);
         customButton.setValues(id, text);
+        customButton.setLayoutParams(new TableRow.LayoutParams(0, MATCH_PARENT, 1.0f));
         customButton.setOnClickListener(this);
         return customButton;
     }

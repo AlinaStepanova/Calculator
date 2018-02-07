@@ -24,7 +24,6 @@ public class Controller {
 
     private void initValues() {
         value = resultArea.getDoubleText();
-        Log.d("val", value + " ");
         firstValue = appendAsIntegerNumber(value);
         secondValue = EMPTY_STRING;
         sign = EMPTY_STRING;
@@ -50,16 +49,12 @@ public class Controller {
         String text = EMPTY_STRING;
         String valueString = String.valueOf(value);
         int dotPosition = String.valueOf(value).indexOf(DOT);
-        if (value % 10 == 0) {
+        if (valueString.substring(valueString.length() - 1).equals("0")) {
             text = valueString.substring(0, dotPosition);
         } else {
             text += value;
         }
         return text;
-    }
-
-    public void setTextView(TextView textView) {
-        resultArea.setTextView(textView);
     }
 
     public void deleteLastCharacter() {
@@ -247,7 +242,6 @@ public class Controller {
     }
 
     public void clearAll() {
-        //initValues();
         resetValues();
         resultArea.clearText();
     }

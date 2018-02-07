@@ -23,8 +23,9 @@ public class Controller {
     }
 
     private void initValues() {
-        value = 0;
-        firstValue = ZERO;
+        value = resultArea.getDoubleText();
+        Log.d("val", value + " ");
+        firstValue = appendAsIntegerNumber(value);
         secondValue = EMPTY_STRING;
         sign = EMPTY_STRING;
     }
@@ -40,6 +41,7 @@ public class Controller {
 
     private void resetValues() {
         firstValue = appendAsIntegerNumber(value);
+        value = 0;
         secondValue = EMPTY_STRING;
         sign = EMPTY_STRING;
     }
@@ -54,6 +56,10 @@ public class Controller {
             text += value;
         }
         return text;
+    }
+
+    public void setTextView(TextView textView) {
+        resultArea.setTextView(textView);
     }
 
     public void deleteLastCharacter() {
@@ -241,7 +247,8 @@ public class Controller {
     }
 
     public void clearAll() {
-        initValues();
+        //initValues();
+        resetValues();
         resultArea.clearText();
     }
 }

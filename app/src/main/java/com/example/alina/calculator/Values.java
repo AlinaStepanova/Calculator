@@ -15,5 +15,6 @@ public class Values {
     public static final String CLOSED_PARENTHESIS = ")";
     public static final String DIVIDE_BY_ZERO_MESSAGE = "Ділення на 0 неможливе";
     public static final String INCORRECT_VALUES_MESSAGE = "Уведені некоректні дані";
+    public static final String TEXT_VIEW_VALUE = "TextViewValue";
 
 }

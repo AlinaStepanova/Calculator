@@ -1,5 +1,6 @@
 package com.example.alina.calculator;
 
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static com.example.alina.calculator.Values.TEXT_VIEW_VALUE;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -23,8 +25,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView = findViewById(R.id.tvTextArea);
-        controller = new Controller(textView, getApplicationContext());
         tableLayout = findViewById(R.id.tlContainer);
+        if (savedInstanceState != null) {
+            textView.setText(savedInstanceState.getString(TEXT_VIEW_VALUE));
+        }
+        controller = new Controller(textView, getApplicationContext());
         initTableLayout();
     }
 
@@ -65,6 +70,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         row.addView(child3);
         row.addView(child4);
         tableLayout.addView(row);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(TEXT_VIEW_VALUE, textView.getText().toString());
     }
 
     @NonNull

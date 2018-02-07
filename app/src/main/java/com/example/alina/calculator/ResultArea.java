@@ -1,8 +1,10 @@
 package com.example.alina.calculator;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
 
 import static com.example.alina.calculator.Values.*;
 
@@ -27,6 +29,20 @@ public class ResultArea {
         String text = textView.getText().toString();
         textView.setText(text.substring(0, text.length() - 1));
         textView.append(sign);
+    }
+
+    public double getDoubleText() {
+        Number number = null;
+        try {
+            number = numberFormat.parse(textView.getText().toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return number != null ? number.doubleValue() : 0;
+    }
+
+    public void setTextView(TextView textView) {
+        this.textView = textView;
     }
 
     public void setResult(double value) {

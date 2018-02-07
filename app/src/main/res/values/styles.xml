@@ -13,6 +13,7 @@
         <item name="android:textSize">@dimen/midText</item>
         <item name="android:layout_margin">@dimen/minMargin</item>
         <item name="android:textColor">@color/colorTextArea</item>
+        <item name="android:gravity">center</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_width">0px</item>
     </style>

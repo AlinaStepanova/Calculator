@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import static com.example.alina.calculator.Values.TEXT_VIEW_VALUE;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button oneButton;
@@ -40,6 +42,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initUIElements();
+        textView = findViewById(R.id.tvTextArea);
+        if (savedInstanceState != null) {
+            textView.setText(savedInstanceState.getString(TEXT_VIEW_VALUE));
+        }
         controller = new Controller(textView, getApplicationContext());
         setListenerToButtons();
     }
@@ -59,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         minusButton = findViewById(R.id.bMinus);
         multiplyButton = findViewById(R.id.bMultiply);
         divideButton = findViewById(R.id.bDivide);
-        textView = findViewById(R.id.tvTextArea);
         equalsButton = findViewById(R.id.bEquals);
         clearAllTextButton = findViewById(R.id.bC);
         sqrtButton = findViewById(R.id.bSqrt);
@@ -153,5 +158,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             default: break;
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(TEXT_VIEW_VALUE, textView.getText().toString());
     }
 }

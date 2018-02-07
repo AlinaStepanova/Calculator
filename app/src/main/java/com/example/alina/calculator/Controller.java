@@ -23,8 +23,8 @@ public class Controller {
     }
 
     private void initValues() {
-        value = 0;
-        firstValue = ZERO;
+        value = resultArea.getDoubleText();
+        firstValue = appendAsIntegerNumber(value);
         secondValue = EMPTY_STRING;
         sign = EMPTY_STRING;
     }
@@ -40,6 +40,7 @@ public class Controller {
 
     private void resetValues() {
         firstValue = appendAsIntegerNumber(value);
+        value = 0;
         secondValue = EMPTY_STRING;
         sign = EMPTY_STRING;
     }
@@ -48,7 +49,7 @@ public class Controller {
         String text = EMPTY_STRING;
         String valueString = String.valueOf(value);
         int dotPosition = String.valueOf(value).indexOf(DOT);
-        if (value % 10 == 0) {
+        if (valueString.substring(valueString.length() - 1).equals(ZERO)) {
             text = valueString.substring(0, dotPosition);
         } else {
             text += value;
@@ -241,7 +242,7 @@ public class Controller {
     }
 
     public void clearAll() {
-        initValues();
+        resetValues();
         resultArea.clearText();
     }
 }

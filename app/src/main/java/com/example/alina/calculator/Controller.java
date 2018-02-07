@@ -49,7 +49,7 @@ public class Controller {
         String text = EMPTY_STRING;
         String valueString = String.valueOf(value);
         int dotPosition = String.valueOf(value).indexOf(DOT);
-        if (valueString.substring(valueString.length() - 1).equals("0")) {
+        if (valueString.substring(valueString.length() - 1).equals(ZERO)) {
             text = valueString.substring(0, dotPosition);
         } else {
             text += value;

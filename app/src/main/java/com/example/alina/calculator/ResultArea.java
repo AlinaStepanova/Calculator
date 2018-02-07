@@ -41,10 +41,6 @@ public class ResultArea {
         return number != null ? number.doubleValue() : 0;
     }
 
-    public void setTextView(TextView textView) {
-        this.textView = textView;
-    }
-
     public void setResult(double value) {
         textView.setText(numberFormat.format(value));
     }

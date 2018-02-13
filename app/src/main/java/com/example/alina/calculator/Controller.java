@@ -25,8 +25,21 @@ public class Controller {
     private void initValues() {
         value = resultArea.getDoubleText();
         firstValue = appendAsIntegerNumber(value);
-        secondValue = EMPTY_STRING;
-        sign = EMPTY_STRING;
+        initExpression();
+    }
+
+    private void initExpression() {
+        if (resultArea.getTextViewLength() > 1
+                && resultArea.getTextViewLength() > firstValue.length() + 1) {
+            sign = resultArea.getSignFromExpression(firstValue);
+            secondValue = resultArea.getSecondValueFromExpression(firstValue);
+            calculateExpression();
+        } else {
+            value = resultArea.getDoubleText();
+            firstValue = appendAsIntegerNumber(value);
+            secondValue = EMPTY_STRING;
+            sign = resultArea.getSign(firstValue);
+        }
     }
 
     private void divideExpression() {
@@ -205,6 +218,7 @@ public class Controller {
     }
 
     public void setSign(String sign) {
+        Log.d("val", "sign " + sign);
         if (this.sign.equals(EMPTY_STRING)) {
             resultArea.appendSymbol(sign);
             this.sign = sign;

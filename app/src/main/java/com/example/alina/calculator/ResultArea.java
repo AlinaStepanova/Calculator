@@ -31,6 +31,22 @@ public class ResultArea {
         textView.append(sign);
     }
 
+    public String getSign(String firstValue) {
+        String sign;
+        if(textView.getText().toString().equals(ZERO)
+                || textView.getText().toString().length() == firstValue.length()) {
+            sign = EMPTY_STRING;
+        } else {
+            rewriteSign(textView.getText().toString().substring(getTextViewLength() - 1));
+            sign = textView.getText().toString().substring(getTextViewLength() - 1);
+        }
+        return sign;
+    }
+
+    public int findPreSign(String firstValue) {
+        return textView.getText().toString().indexOf(firstValue.substring(firstValue.length() - 1));
+    }
+
     public double getDoubleText() {
         Number number = null;
         try {
@@ -64,5 +80,19 @@ public class ResultArea {
 
     public void clearText() {
         textView.setText(ZERO);
+    }
+
+    public int getTextViewLength() {
+        return textView.getText().toString().length();
+    }
+
+    public String getSignFromExpression(String firstValue) {
+        return textView.getText().toString().substring(findPreSign(firstValue) + 1,
+                findPreSign(firstValue) + 2);
+    }
+
+    public String getSecondValueFromExpression(String firstValue) {
+        return textView.getText().toString().substring(findPreSign(firstValue) + 2,
+                getTextViewLength()).replace(",", ".");
     }
 }

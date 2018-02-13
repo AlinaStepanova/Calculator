@@ -1,9 +1,8 @@
 package com.example.alina.calculator;
 
-import android.os.PersistableBundle;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -90,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        Button button = (Button)view;
+        Button button = (Button) view;
         switch (view.getId()) {
             case R.id.bOne:
             case R.id.bTwo:
@@ -140,7 +139,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bDeleteLast:
                 controller.deleteLastCharacter();
                 break;
-            default: break;
+            default:
+                break;
         }
     }
 }

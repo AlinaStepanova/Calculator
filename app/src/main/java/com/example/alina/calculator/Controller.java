@@ -5,7 +5,17 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static com.example.alina.calculator.Values.*;
+import static com.example.alina.calculator.Values.CLOSED_PARENTHESIS;
+import static com.example.alina.calculator.Values.COMA;
+import static com.example.alina.calculator.Values.DIVIDE;
+import static com.example.alina.calculator.Values.DIVIDE_BY_ZERO_MESSAGE;
+import static com.example.alina.calculator.Values.DOT;
+import static com.example.alina.calculator.Values.EMPTY_STRING;
+import static com.example.alina.calculator.Values.INCORRECT_VALUES_MESSAGE;
+import static com.example.alina.calculator.Values.MINUS;
+import static com.example.alina.calculator.Values.MULTIPLY;
+import static com.example.alina.calculator.Values.PLUS;
+import static com.example.alina.calculator.Values.ZERO;
 
 public class Controller {
 
@@ -43,7 +53,7 @@ public class Controller {
     }
 
     private void divideExpression() {
-        if (Double.parseDouble(secondValue) != 0 ) {
+        if (Double.parseDouble(secondValue) != 0) {
             value = Double.parseDouble(firstValue) / Double.parseDouble(secondValue);
         } else {
             Toast.makeText(context, DIVIDE_BY_ZERO_MESSAGE, Toast.LENGTH_SHORT).show();
@@ -100,6 +110,7 @@ public class Controller {
         } else {
             if (secondValue.equals(ZERO)) {
                 secondValue = EMPTY_STRING;
+                resultArea.setMultipleStrings(firstValue, sign, secondValue, EMPTY_STRING);
             }
             secondValue += textViewValue;
         }
@@ -218,15 +229,13 @@ public class Controller {
     }
 
     public void setSign(String sign) {
-        Log.d("val", "sign " + sign);
         if (this.sign.equals(EMPTY_STRING)) {
             resultArea.appendSymbol(sign);
             this.sign = sign;
-        } else if(!firstValue.isEmpty() && !sign.isEmpty() && secondValue.isEmpty()) {
+        } else if (!firstValue.isEmpty() && !sign.isEmpty() && secondValue.isEmpty()) {
             resultArea.rewriteSign(sign);
             this.sign = sign;
-        }
-        else {
+        } else {
             calculateExpression();
         }
     }
@@ -249,7 +258,8 @@ public class Controller {
             case DIVIDE:
                 divideExpression();
                 break;
-            default: break;
+            default:
+                break;
         }
         resultArea.setResult(value);
         resetValues();

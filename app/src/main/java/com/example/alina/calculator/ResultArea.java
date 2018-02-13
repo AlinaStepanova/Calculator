@@ -1,4 +1,5 @@
 package com.example.alina.calculator;
+
 import android.util.Log;
 import android.widget.TextView;
 
@@ -6,7 +7,10 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 
-import static com.example.alina.calculator.Values.*;
+import static com.example.alina.calculator.Values.CLOSED_PARENTHESIS;
+import static com.example.alina.calculator.Values.EMPTY_STRING;
+import static com.example.alina.calculator.Values.OPENED_PARENTHESIS;
+import static com.example.alina.calculator.Values.ZERO;
 
 public class ResultArea {
 
@@ -15,7 +19,7 @@ public class ResultArea {
 
     public ResultArea(TextView textView) {
         this.textView = textView;
-        this.numberFormat =  new DecimalFormat("#.######");
+        this.numberFormat = new DecimalFormat("#.######");
     }
 
     public void appendSymbol(String text) {
@@ -33,7 +37,7 @@ public class ResultArea {
 
     public String getSign(String firstValue) {
         String sign;
-        if(textView.getText().toString().equals(ZERO)
+        if (textView.getText().toString().equals(ZERO)
                 || textView.getText().toString().length() == firstValue.length()) {
             sign = EMPTY_STRING;
         } else {
@@ -70,7 +74,9 @@ public class ResultArea {
     }
 
     public void setMultipleStrings(String firstValue, String sign, String secondValue, String coma) {
-        if (Double.parseDouble(secondValue) < 0) {
+        if (secondValue.isEmpty()) {
+            setStringResult(getFormat(firstValue) + sign);
+        } else if (Double.parseDouble(secondValue) < 0) {
             setStringResult(getFormat(firstValue) + sign + OPENED_PARENTHESIS
                     + getFormat(secondValue) + coma + CLOSED_PARENTHESIS);
         } else {

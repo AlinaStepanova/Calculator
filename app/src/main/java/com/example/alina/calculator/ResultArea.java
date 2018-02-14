@@ -1,6 +1,5 @@
 package com.example.alina.calculator;
 
-import android.util.Log;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -29,10 +28,8 @@ public class ResultArea {
         textView.append(text);
     }
 
-    public void rewriteSign(String sign) {
-        String text = textView.getText().toString();
-        textView.setText(text.substring(0, text.length() - 1));
-        textView.append(sign);
+    public int getTextViewLength() {
+        return textView.getText().toString().length();
     }
 
     public String getSign(String firstValue) {
@@ -47,8 +44,8 @@ public class ResultArea {
         return sign;
     }
 
-    public int findPreSign(String firstValue) {
-        return textView.getText().toString().indexOf(firstValue.substring(firstValue.length() - 1));
+    public String getFormat(String value) {
+        return numberFormat.format(Double.valueOf(value));
     }
 
     public double getDoubleText() {
@@ -63,10 +60,6 @@ public class ResultArea {
 
     public void setResult(double value) {
         textView.setText(numberFormat.format(value));
-    }
-
-    public String getFormat(String value) {
-        return numberFormat.format(Double.valueOf(value));
     }
 
     public void setStringResult(String stringResult) {
@@ -84,12 +77,18 @@ public class ResultArea {
         }
     }
 
-    public void clearText() {
-        textView.setText(ZERO);
+    public void rewriteSign(String sign) {
+        String text = textView.getText().toString();
+        textView.setText(text.substring(0, text.length() - 1));
+        textView.append(sign);
     }
 
-    public int getTextViewLength() {
-        return textView.getText().toString().length();
+    public int findPreSign(String firstValue) {
+        return textView.getText().toString().indexOf(firstValue.substring(firstValue.length() - 1));
+    }
+
+    public void clearText() {
+        textView.setText(ZERO);
     }
 
     public String getSignFromExpression(String firstValue) {

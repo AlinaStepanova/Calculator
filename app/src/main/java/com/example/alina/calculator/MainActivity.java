@@ -13,7 +13,7 @@ import android.widget.TextView;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static com.example.alina.calculator.Values.TEXT_VIEW_VALUE;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Controller controller;
     private TextView textView;
@@ -33,30 +33,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initTableLayout() {
-        initTableRow(initButton(R.id.bPercent, R.string.percent),
-                initButton(R.id.bSqrt, R.string.sqrt),
-                initButton(R.id.bSqr, R.string.xSquared),
-                initButton(R.id.bOneDivX, R.string._1_x));
-        initTableRow(initButton(R.id.bCE, R.string.ce),
-                initButton(R.id.bC, R.string.c),
-                initButton(R.id.bDeleteLast, R.string.deleteLast),
-                initButton(R.id.bDivide, R.string.divide));
-        initTableRow(initButton(R.id.bSeven, R.string.seven),
-                initButton(R.id.bEight, R.string.eight),
-                initButton(R.id.bNine, R.string.nine),
-                initButton(R.id.bMultiply, R.string.multiply));
-        initTableRow(initButton(R.id.bFour, R.string.four),
-                initButton(R.id.bFive, R.string.five),
-                initButton(R.id.bSix, R.string.six),
-                initButton(R.id.bMinus, R.string.minus));
-        initTableRow(initButton(R.id.bOne, R.string.one),
-                initButton(R.id.bTwo, R.string.two),
-                initButton(R.id.bThree, R.string.three),
-                initButton(R.id.bPlus, R.string.plus));
-        initTableRow(initButton(R.id.bChangeSign, R.string.changeSign),
-                initButton(R.id.bZero, R.string.zero),
-                initButton(R.id.bComa, R.string.coma),
-                initButton(R.id.bEquals, R.string.equals));
+        initTableRow(initButton(R.id.bPercent, "percent"),
+                initButton(R.id.bSqrt, "sqrt"),
+                initButton(R.id.bSqr, "xSquared"),
+                initButton(R.id.bOneDivX, "_1_x"));
+        initTableRow(initButton(R.id.bCE, "ce"),
+                initButton(R.id.bC, "c"),
+                initButton(R.id.bDeleteLast, "deleteLast"),
+                initButton(R.id.bDivide, "divide"));
+        initTableRow(initButton(R.id.bSeven, "7"),
+                initButton(R.id.bEight, "8"),
+                initButton(R.id.bNine, "9"),
+                initButton(R.id.bMultiply, "multiply"));
+        initTableRow(initButton(R.id.bFour, "4"),
+                initButton(R.id.bFive, "5"),
+                initButton(R.id.bSix, "6"),
+                initButton(R.id.bMinus, "minus"));
+        initTableRow(initButton(R.id.bOne, "1"),
+                initButton(R.id.bTwo, "2"),
+                initButton(R.id.bThree, "3"),
+                initButton(R.id.bPlus, "plus"));
+        initTableRow(initButton(R.id.bChangeSign, "changeSign"),
+                initButton(R.id.bZero, "0"),
+                initButton(R.id.bComa, "coma"),
+                initButton(R.id.bEquals, "equals"));
     }
 
     private void initTableRow(CustomButton child, CustomButton child2, CustomButton child3,
@@ -78,12 +78,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @NonNull
-    private CustomButton initButton(int id, int text) {
+    private CustomButton initButton(int id, String text) {
         CustomButton customButton =
                 (CustomButton) getLayoutInflater().inflate(R.layout.custom_button, null);
-        customButton.setValues(id, text);
         customButton.setLayoutParams(new TableRow.LayoutParams(0, MATCH_PARENT, 1.0f));
         customButton.setOnClickListener(this);
+        customButton.queryFireBaseValues(id, text);
         return customButton;
     }
 

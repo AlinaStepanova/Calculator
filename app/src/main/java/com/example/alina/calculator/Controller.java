@@ -36,15 +36,19 @@ public class Controller {
         value = resultArea.getDoubleText();
         firstValue = appendAsIntegerNumber(value);
         initExpression();
+        Log.d("val", "init value " + value + " fv " + firstValue + " sv " + secondValue + " sign " + sign);
     }
 
     private void initExpression() {
         if (resultArea.getTextViewLength() > 1
                 && resultArea.getTextViewLength() > firstValue.length() + 1) {
+            Log.d("val", "if");
             sign = resultArea.getSignFromExpression(firstValue);
             secondValue = resultArea.getSecondValueFromExpression(firstValue);
+            Log.d("val", "if first " + firstValue + " if second " + secondValue + " if sign " + sign);
             calculateExpression();
         } else {
+            Log.d("val", "else");
             value = resultArea.getDoubleText();
             firstValue = appendAsIntegerNumber(value);
             secondValue = EMPTY_STRING;
@@ -102,6 +106,7 @@ public class Controller {
     }
 
     public void addNumberToTextViewValue(String textViewValue) {
+        Log.d("val", "addNumber " + textViewValue);
         if (firstValue.equals(String.valueOf(value)) && secondValue.isEmpty() && sign.isEmpty()) {
             clearAll();
             firstValue += textViewValue;
@@ -229,6 +234,7 @@ public class Controller {
     }
 
     public void setSign(String sign) {
+        Log.d("val", "sign " + sign);
         if (this.sign.equals(EMPTY_STRING)) {
             resultArea.appendSymbol(sign);
             this.sign = sign;

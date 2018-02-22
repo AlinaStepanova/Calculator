@@ -1,12 +1,12 @@
 package com.example.alina.calculator.data;
 
 
-public class FireBaseValue {
+public class FireBaseEntity {
 
     private String key;
     private String value;
 
-    public FireBaseValue() {
+    public FireBaseEntity() {
     }
 
     public String getKey() {

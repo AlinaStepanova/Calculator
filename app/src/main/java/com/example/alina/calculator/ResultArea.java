@@ -1,5 +1,6 @@
 package com.example.alina.calculator;
 
+import android.util.Log;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -48,6 +49,15 @@ public class ResultArea {
         return numberFormat.format(Double.valueOf(value));
     }
 
+    public String getSignFromExpression(String firstValue) {
+        return textView.getText().toString().substring(firstValue.length(), firstValue.length() + 1);
+    }
+
+    public String getSecondValueFromExpression(String firstValue) {
+        return textView.getText().toString().substring(firstValue.length() + 1,
+                getTextViewLength()).replace(",", ".");
+    }
+
     public double getDoubleText() {
         Number number = null;
         try {
@@ -66,7 +76,8 @@ public class ResultArea {
         textView.setText(stringResult);
     }
 
-    public void setMultipleStrings(String firstValue, String sign, String secondValue, String coma) {
+    public void setMultipleStrings(String firstValue, String sign, String secondValue,
+                                   String coma) {
         if (secondValue.isEmpty()) {
             setStringResult(getFormat(firstValue) + sign);
         } else if (Double.parseDouble(secondValue) < 0) {
@@ -83,21 +94,7 @@ public class ResultArea {
         textView.append(sign);
     }
 
-    public int findPreSign(String firstValue) {
-        return textView.getText().toString().indexOf(firstValue.substring(firstValue.length() - 1));
-    }
-
     public void clearText() {
         textView.setText(ZERO);
-    }
-
-    public String getSignFromExpression(String firstValue) {
-        return textView.getText().toString().substring(findPreSign(firstValue) + 1,
-                findPreSign(firstValue) + 2);
-    }
-
-    public String getSecondValueFromExpression(String firstValue) {
-        return textView.getText().toString().substring(findPreSign(firstValue) + 2,
-                getTextViewLength()).replace(",", ".");
     }
 }

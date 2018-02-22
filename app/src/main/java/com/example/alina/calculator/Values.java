@@ -21,6 +21,8 @@ public class Values {
     public final static String NAME_OPERATION_KEY = "OPERATION_KEY";
     public final static String NAME_OPERATION_VALUE = "OPERATIONS_VALUE";
     public final static String ACTION_REQUEST_TO_FIRE_BASE = "ACTION_REQUEST_TO_FIRE_BASE";
+    public final static String KEY_NUMBERS_MAP = "KEY_NUMBERS_MAP";
+    public final static String KEY_OPERATIONS_MAP = "KEY_OPERATIONS_MAP";
     public final static int NUMBERS_COUNT = 10;
     public final static int OPERATIONS_COUNT = 14;
 }

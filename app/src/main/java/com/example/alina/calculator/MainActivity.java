@@ -21,6 +21,8 @@ import java.util.HashMap;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static com.example.alina.calculator.Values.ACTION_REQUEST_TO_FIRE_BASE;
+import static com.example.alina.calculator.Values.KEY_NUMBERS_MAP;
+import static com.example.alina.calculator.Values.KEY_OPERATIONS_MAP;
 import static com.example.alina.calculator.Values.TEXT_VIEW_VALUE;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnDataStored{
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView textView;
     private TableLayout tableLayout;
     private DataReceiver dataReceiver;
+    public HashMap<String, String> numbers = new HashMap<>();
+    public HashMap<String, String> operations = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +42,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tableLayout = findViewById(R.id.tlContainer);
         dataReceiver = new DataReceiver(this);
         startService();
+        resetUI(savedInstanceState);
+        controller = new Controller(textView, getApplicationContext());
+    }
+
+    private void resetUI(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             textView.setText(savedInstanceState.getString(TEXT_VIEW_VALUE));
+            numbers = (HashMap<String, String>) savedInstanceState.getSerializable(KEY_NUMBERS_MAP);
+            operations = (HashMap<String, String>) savedInstanceState.getSerializable(KEY_OPERATIONS_MAP);
+            initTableLayout(numbers, operations);
         }
-        controller = new Controller(textView, getApplicationContext());
     }
 
     private void startService() {
@@ -92,12 +103,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tableLayout.addView(row);
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString(TEXT_VIEW_VALUE, textView.getText().toString());
-    }
-
     @NonNull
     private CustomButton initButton(int id, String text) {
         CustomButton customButton =
@@ -106,6 +111,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         customButton.setOnClickListener(this);
         customButton.initValues(id, text);
         return customButton;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(TEXT_VIEW_VALUE, textView.getText().toString());
+        outState.putSerializable(KEY_NUMBERS_MAP, numbers);
+        outState.putSerializable(KEY_OPERATIONS_MAP, operations);
     }
 
     @Override
@@ -173,6 +186,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onDataStored(HashMap<String, String> numbers, HashMap<String, String> operations) {
-        initTableLayout(numbers, operations);
+        this.numbers = numbers;
+        this.operations = operations;
+        initTableLayout(this.numbers, this.operations);
     }
 }

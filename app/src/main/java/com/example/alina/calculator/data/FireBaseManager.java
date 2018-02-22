@@ -1,6 +1,5 @@
 package com.example.alina.calculator.data;
 
-
 import com.example.alina.calculator.data.listeners.OnDataReceived;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

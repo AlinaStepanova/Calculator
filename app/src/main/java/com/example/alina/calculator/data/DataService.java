@@ -31,7 +31,6 @@ public class DataService extends Service implements OnDataReceived {
     @Override
     public void onDataReceived(String key, String value) {
         String regex = "[0-9]+";
-        Log.d("val", "in onDataReceived key " + key + " value " + value);
         if (key.matches(regex)) {
             intent.putExtra(NAME_NUMBER_KEY, key);
             intent.putExtra(NAME_NUMBER_VALUE, value);

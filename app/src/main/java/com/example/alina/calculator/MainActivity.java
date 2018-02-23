@@ -63,7 +63,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startService(intent);
     }
 
-    private void initTableLayout(HashMap<String, String> numbers, HashMap<String, String> operations) {
+    private void initTableLayout(HashMap<String, String> numbers,
+                                 HashMap<String, String> operations) {
         Log.d("val", "in initTableLayout");
         initTableRow(initButton(R.id.bPercent, operations.get("percent")),
                 initButton(R.id.bSqrt, operations.get("sqrt")),
@@ -185,7 +186,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onDataStored(HashMap<String, String> numbers, HashMap<String, String> operations) {
+    public void onDataStored(HashMap<String, String> numbers,
+                             HashMap<String, String> operations) {
         this.numbers = numbers;
         this.operations = operations;
         initTableLayout(this.numbers, this.operations);
